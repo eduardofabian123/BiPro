@@ -1,0 +1,32 @@
+<ion-header>
+	<ion-navbar no-border-bottom color="twitter">
+		<ion-title>Iniciar sesión</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content padding hide-tabs>
+	<div class="container" text-center>
+		<ion-list text-center>
+			<ion-item>
+				<ion-label stacked>Usuario</ion-label>
+				<ion-input type="text" [(ngModel)]="username"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label stacked>Clave de acceso</ion-label>
+				<ion-input type="password" [(ngModel)]="password"></ion-input>
+			</ion-item>
+			<button ion-button full (click)="login()">Entrar</button>
+	        <ion-item>
+	            <ion-grid>
+	                <ion-row align-items-center>
+	                    <ion-col text-center>
+	                        <img margin-top class="logo" src="assets/img/logo.png">
+	                    </ion-col>
+	                    <ion-col text-right>
+	                        <img margin-top class="icon" src="assets/img/icon.png">
+	                    </ion-col>
+	                </ion-row>
+	            </ion-grid>
+	        </ion-item>
+		</ion-list>
+	</div>
+</ion-content>

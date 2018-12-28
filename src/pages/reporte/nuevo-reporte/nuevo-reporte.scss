@@ -1,0 +1,25 @@
+page-nuevo-reporte {
+	.ng2-smart-actions {
+		display: none;
+	}
+	.ng2-smart-actions-title {
+		display: none;
+	}
+	.ng2-smart-actions-title-add {
+		display: none;
+	}
+	#container {
+		display: flex;
+		justify-content: center;
+		height: 500px;
+		min-width: 100%;
+		max-width: 100%;
+		margin: 0 auto;
+	}
+	:host /deep/ ng2-smart-table {
+		font-size: 22px;
+	}
+	// [hidden] {
+	// 	display: none;
+	// }
+}

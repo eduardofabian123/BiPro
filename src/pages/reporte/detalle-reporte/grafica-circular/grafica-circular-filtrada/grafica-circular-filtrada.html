@@ -1,0 +1,52 @@
+<ion-header>
+	<ion-navbar no-border-bottom color="twitter">
+		<ion-title>Detalle de {{ title }}</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content padding>
+	<div id="container">
+		<chart [options]="options"></chart>
+	</div>
+	<hr>
+	<hr>
+	<ion-card>
+		<ion-grid>
+			<ion-row>
+				<ion-col offset-4 col-6 text-left>
+					<span item-left><strong>Monto total USD: </strong> {{ monto_total }}</span>
+				</ion-col>
+				<ion-col col-2>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col offset-4 col-6 text-left>
+					<span item-left><strong>Total de proyectos: </strong> {{ total_proyectos }}</span>
+				</ion-col>
+				<ion-col col-2>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-card>
+	<ion-card *ngFor="let proyecto of proyectos">
+		<ion-grid>
+			<ion-row>
+				<ion-col col-2>
+					<h4>{{ proyecto.campo }}</h4>
+					<strong>{{ proyecto.porcentaje }} %</strong>
+				</ion-col>
+				<ion-col col-5 text-center>
+					<strong>Monto USD: </strong>
+					<p class="medium">{{ proyecto.monto }}</p>
+				</ion-col>
+				<ion-col col-3 text-wrap text-justify>
+					<strong>No. de proyectos: </strong>{{ proyecto.numero_proyectos }}
+				</ion-col>
+				<ion-col col-2 class="right">
+					<button ion-button clear item-end (click)="verProyectosAgrupados(groupBy, proyecto.campo, proyecto.monto)">
+						<p style="text-transform: none; color: #3498DB;">Ver detalle</p>
+					</button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-card>
+</ion-content>

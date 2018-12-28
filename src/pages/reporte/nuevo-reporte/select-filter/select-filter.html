@@ -1,0 +1,21 @@
+<ion-header>
+	<ion-navbar padding-top color="twitter">
+		<ion-title>Filtrar por {{ filtro.title }}</ion-title>
+		<ion-buttons start>
+			<button ion-button (click)="cancelar()">
+				<span ion-text color="primary" showWhen="ios">Cancelar</span>
+				<ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+<ion-content padding>
+	<button ion-button block color="botton" (click)="aceptar()">Aceptar</button>
+	<ion-list>
+		<ion-item *ngFor="let item of opciones">
+			<ion-label>{{ item.campo }}</ion-label>
+			<!-- (ionChange)="selectOpcion($event, item.campo)" -->
+			<ion-checkbox [(ngModel)]="item.checked" ></ion-checkbox>
+		</ion-item>
+	</ion-list>
+</ion-content>

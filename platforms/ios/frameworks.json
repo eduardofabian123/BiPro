@@ -1,0 +1,11 @@
+{
+    "libz.tbd": 2,
+    "UIKit.framework": 1,
+    "Foundation.framework": 1,
+    "QuartzCore.framework": 1,
+    "ImageIO.framework": 1,
+    "MessageUI.framework": 1,
+    "Security.framework": 2,
+    "SystemConfiguration.framework": 2,
+    "WebKit.framework": 1
+}

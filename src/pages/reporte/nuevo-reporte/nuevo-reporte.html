@@ -1,0 +1,28 @@
+<ion-header>
+	<ion-navbar no-border-bottom color="twitter">
+		<ion-title>Nuevo reporte</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content padding>
+	<button ion-button full (click)="selectColumnas()">Seleccionar columnas</button>
+	<button ion-button full (click)="filtrarColumnas()">Filtrar columnas</button>
+	<ion-scroll scrollX scrollY style="width: 100%; height: 500px" zoom="true">
+		<ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
+	</ion-scroll>
+	<button ion-button full (click)="selectAgrupaciones()">Seleccionar agrupaciones</button>
+	<div id="container" *ngIf="visible">
+		<chart [options]="options"></chart>
+	</div>
+	<hr>
+	<hr>
+	<ion-grid>
+		<ion-row>
+			<ion-col text-center>
+				<button ion-button (click)="cancelar()" *ngIf="visible">Cancelar</button>
+			</ion-col>
+			<ion-col text-center>
+				<button ion-button *ngIf="visible" (click)="guardarReporte()">Guardar</button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

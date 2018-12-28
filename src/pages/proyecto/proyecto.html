@@ -1,0 +1,67 @@
+<ion-header>
+    <ion-navbar color="twitter">
+        <ion-title text-center>Proyectos</ion-title>
+        <ion-buttons left>
+            <button ion-button icon-only (click)="mostrarOpciones()">
+                <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons right>
+            <button ion-button icon-only (click)="logout()">
+                <ion-icon ios="ios-log-out" md="md-log-out"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-grid no-padding>
+                <ion-row align-items-center>
+                    <ion-col col-12 col-sm-10>
+                        <ion-searchbar [(ngModel)]="textoBusqueda" (ionInput)="buscaProyectos($event)" [animated]="true" [showCancelButton]="false" [cancelButtonText]="Cancelar" (ionCancel)="onCancel($event)" placeholder="Buscar">
+                        </ion-searchbar>
+                    </ion-col>
+                    <ion-col col-12 col-sm-2>
+                        <button ion-button full (click)="busquedaProyectos()">Buscar</button>
+                    </ion-col>
+                </ion-row>
+                <ion-row align-items-center>
+                    <button ion-button full (click)="muestraFiltros()" style="text-transform: capitalize;">Búsqueda avanzada</button>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+    </ion-list>
+    <ion-list [virtualScroll]="proyectos" [bufferRatio]="3.1" [approxItemHeight]="'300px'">
+        <ion-item *virtualItem="let proyecto">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-1>
+                        <ion-icon name="pricetags" item-start large></ion-icon>
+                    </ion-col>
+                    <ion-col text-wrap text-justify col-sm-11>
+                        <h2><strong>Proyecto</strong></h2>
+                        <h3>{{ proyecto.nombre_proyecto }}</h3>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col text-center offset-1 col-11 col-md-5>
+                        <span item-left><strong>Monto USD: </strong> {{ proyecto.monto }}</span>
+                        <!--  <strong><p margin-right>Monto USD: </p></strong>
+                        <p class="medium">{{ proyecto.monto }}</p> -->
+                    </ion-col>
+                    <ion-col text-center offset-1 col-11 col-md-5>
+                        <span item-left><strong>Monto original: </strong> {{ proyecto.monto_moneda_original }} {{ proyecto.moneda }}</span>
+                        <!-- <strong><p margin-right>Monto original: </p></strong>
+                        <p class="medium">{{ proyecto.monto_moneda_original }} {{ proyecto.moneda }}</p> -->
+                    </ion-col>
+                    <ion-col text-right offset-1>
+                        <button margin-left ion-button small clear (click)="detalleProyecto(proyecto)">
+                            <div style="text-transform: none; color: #3498DB;">Ver detalle</div>
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+    </ion-list>
+</ion-content>

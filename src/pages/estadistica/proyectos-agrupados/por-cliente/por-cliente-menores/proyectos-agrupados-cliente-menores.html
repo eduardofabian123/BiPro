@@ -1,0 +1,61 @@
+<ion-header>
+    <ion-navbar no-border-bottom color="twitter" text-wrap text-justify>
+        <ion-title>
+            Detalle de los proyectos agrupados
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-card>
+        <ion-grid>
+            <ion-row>
+                <ion-col text-wrap text-center>
+                    <strong>Monto total USD: </strong>
+                    <p class="medium">{{ monto_total }}</p>
+                </ion-col>
+                <ion-col text-wrap text-center>
+                    <strong>Total de proyectos agrupados: </strong>
+                    <p class="medium">{{ proyectosNumero }}</p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+    <ion-list [virtualScroll]="proyectos">
+        <ion-item *virtualItem="let proyecto">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-1>
+                        <ion-icon name="pricetags" item-start large></ion-icon>
+                    </ion-col>
+                    <ion-col text-wrap text-justify>
+                        <h2><strong>Contratante</strong></h2>
+                        <h3>{{ proyecto.contratante }}</h3>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-1>
+                    </ion-col>
+                    <ion-col class="inline">
+                        <strong><p  margin-right>Porcentaje: </p></strong>
+                        <p class="medium">{{ proyecto.porcentaje }} %</p>
+                    </ion-col>
+                    <ion-col class="inline">
+                        <strong><p margin-right>Monto USD: </p></strong>
+                        <p class="medium">{{ proyecto.monto }}</p>
+                    </ion-col>
+                    <ion-col class="inline">
+                        <strong><p margin-right>No de proyectos: </p></strong>
+                        <p class="medium">{{ proyecto.numero_proyectos }}</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col text-right>
+                        <button ion-button clear item-end (click)="verProyectosAgrupadosCliente(proyecto.contratante, proyecto.monto)">
+                            <div style="text-transform: none; color: #3498DB;">Ver detalle</div>
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+    </ion-list>
+</ion-content>

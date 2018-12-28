@@ -1,0 +1,57 @@
+<ion-header>
+	<ion-navbar color="twitter">
+		<ion-title>Ayuda</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content padding>
+	<ion-list>
+		<ion-item>
+			<ion-grid>
+				<ion-row>
+					<ion-col col-12 text-center>
+						<strong>Versión</strong>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col col-12 text-center>
+						{{ versionApp }}
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col col-12 text-center>
+						<strong>Nombre</strong>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col col-12 text-center>
+						{{ nombreApp }}
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col col-12 text-center>
+						<strong>Última fecha de sincronización</strong>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col col-12 text-center>
+						{{ lastFechaSincronizacion }}
+					</ion-col>
+				</ion-row>
+				<hr>
+				<hr>
+				<ion-row>
+					<ion-col col-12 text-center>
+						<button ion-button full (click)="muestraPdf()">Ayuda</button>
+					</ion-col>
+				</ion-row>
+				<hr>
+				<hr>
+				<ion-row>
+					<ion-col col-12 text-center>
+						<button ion-button full (click)="sincronizar()">Sincronizar</button>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-item>
+	</ion-list>
+</ion-content>

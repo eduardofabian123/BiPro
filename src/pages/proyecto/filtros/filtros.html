@@ -1,0 +1,53 @@
+<ion-header>
+	<ion-navbar color="twitter" [ngStyle]="{'height': '60px'}">
+		<ion-title text-center>Seleccione columnas</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content padding>
+<!-- 	<ion-list radio-group>
+		<ion-grid>
+			<ion-row>
+				<ion-col col-4>
+					<ion-item>
+						<ion-label color="twitter">
+						<strong>Seleccionar todos</strong></ion-label>
+						<ion-radio (ionSelect)="seleccionAll()"></ion-radio>
+					</ion-item>
+				</ion-col>
+				<ion-col col-4>
+					<ion-item>
+						<ion-label color="twitter">
+						<strong>Selección por default</strong></ion-label>
+						<ion-radio checked (ionSelect)="seleccionDefault()"></ion-radio>
+					</ion-item>
+				</ion-col>
+				<ion-col col-4>
+					<ion-item>
+						<ion-label color="twitter">
+						<strong>Selección personalizada</strong></ion-label>
+						<ion-radio (ionSelect)="seleccionLibre()"></ion-radio>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-list> -->
+
+	<ion-list>
+		<ion-item *ngFor="let item of items">
+			<ion-label>{{ item.texto }}</ion-label>
+			<ion-checkbox [(ngModel)]="item.checked"></ion-checkbox>
+		</ion-item>
+	</ion-list>
+		<ion-item>
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<button ion-button block color="botton" (click)="cerrarFiltros()">Aceptar</button>
+					</ion-col>
+					<ion-col>
+						<button ion-button block color="botton" (click)="cancelar()">Cancelar</button>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-item>
+</ion-content>

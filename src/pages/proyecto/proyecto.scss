@@ -1,0 +1,22 @@
+page-proyecto {
+	.inline {
+		display: inherit
+	}
+		p {
+			padding-right: 10px;
+		}
+
+	.right {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.left {
+		display: flex;
+		justify-content: flex-start;
+	}
+
+	.medium {
+		font-size: 13px
+	}
+}

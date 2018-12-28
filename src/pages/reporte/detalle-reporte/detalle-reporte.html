@@ -1,0 +1,295 @@
+<ion-header>
+	<ion-navbar no-border-bottom color="twitter">
+		<ion-title>{{ nombreReporte }}</ion-title>
+	</ion-navbar>
+	<ion-toolbar no-border-top>
+		<ion-segment [(ngModel)]="porcentaje">
+			<ion-segment-button value="porcentaje" (ionSelect)="getDatosPorPorcentaje()">
+				%
+			</ion-segment-button>
+			<ion-segment-button value="monto_usd" (ionSelect)="getDatosPorUsd()">
+				$
+			</ion-segment-button>
+			<ion-segment-button value="numero_proyectos" (ionSelect)="getDatosNumeroProyectos()">
+				#
+			</ion-segment-button>
+		</ion-segment>
+	</ion-toolbar>
+</ion-header>
+<ion-content padding>
+	<div [ngSwitch]="porcentaje">
+		<ion-list *ngSwitchCase="'numero_proyectos'">
+			<div text-right>
+				<div text-right>
+					<button ion-button clear (click)="modoCircular(campo_select, campo_agrupacion)">Ver modo circular</button>
+				</div>
+			</div>
+			<div id="container" text-center>
+			</div>
+			<div text-center margin-top>
+				<strong>Filtrar por :</strong>
+				<i (click)="filtrar()" class="fa fa-filter" aria-hidden="true" style="font-size: 30px" padding-top></i>
+				<button ion-button clear margin-left (click)="aplicarFiltro()">Aplicar filtro</button>
+			</div>
+			<hr>
+			<hr>
+			<ion-card>
+				<ion-grid>
+					<ion-row>
+						<ion-col text-center col-12 col-md-12>
+							<span item-left><strong>Monto total USD: </strong> {{ monto_total }}</span>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col text-center col-12 col-md-12>
+							<span item-left><strong>Total de proyectos: </strong> {{ total_proyectos }}</span>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card>
+			<ion-card *ngFor="let proyecto of reportes">
+				<ion-grid>
+					<ion-row>
+						<ion-col text-center col-12 col-sm-2>
+							<span item-left><strong>{{ proyecto.campo }}</strong></span>
+							<p>{{ proyecto.porcentaje }} %</p>
+						</ion-col>
+						<ion-col col-12 text-center col-sm-5>
+							<span item-left><strong>Monto USD: </strong>{{ proyecto.monto }}</span>
+						</ion-col>
+						<ion-col col-12 col-sm-3 text-wrap text-center>
+							<span item-left><strong>No. de proyectos: </strong>{{ proyecto.numero_proyectos }}</span>
+						</ion-col>
+						<ion-col col-12 col-sm-2 text-right>
+							<button ion-button clear item-end (click)="verProyectosAgrupados(proyecto.group_by, proyecto.campo, proyecto.monto)">
+								<p style="text-transform: none; color: #3498DB;">Ver detalle</p>
+							</button>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card>
+			<ion-card>
+				<ion-grid>
+					<ion-row>
+						<ion-col text-center col-12 col-md-12>
+							<span item-left><strong>Monto total USD: </strong> {{ monto_total }}</span>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col text-center col-12 col-md-12>
+							<span item-left><strong>Total de proyectos: </strong> {{ total_proyectos }}</span>
+						</ion-col>
+
+					</ion-row>
+				</ion-grid>
+			</ion-card>
+			<div padding-top text-center style="border-bottom: 3px double #2E86C1;" [hidden]="!visible">
+				<h3>Proyectos agrupados</h3>
+			</div>
+			<ion-card [hidden]="!visible">
+				<ion-grid>
+					<ion-row>
+						<ion-col text-center col-12 col-sm-2>
+							<h4>Varios proyectos</h4>
+							<strong>{{ proyectos_agrupados.porcentaje }} %</strong>
+						</ion-col>
+						<ion-col col-12 text-center col-sm-5>
+							<strong>Monto USD: </strong>
+							<p class="medium">{{ proyectos_agrupados.suma_montos_menores_de_uno }}</p>
+						</ion-col>
+						<ion-col col-12 col-sm-3 text-wrap text-center>
+							<strong>No. de proyectos: </strong>{{ proyectos_agrupados.numero_proyectos }}
+						</ion-col>
+						<ion-col col-12 col-sm-2 text-right>
+							<button ion-button clear item-end (click)="verProyectosAgrupadosClientePorcentajeMenosAUno(proyectos_agrupados.suma_montos_menores_de_uno)">
+								<p style="text-transform: none; color: #3498DB;">Ver detalle</p>
+							</button>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card>
+		</ion-list>
+		<ion-list *ngSwitchCase="'monto_usd'">
+			<div text-right>
+				<div text-right>
+					<button ion-button clear (click)="modoCircular(campo_select, campo_agrupacion)">Ver modo circular</button>
+				</div>
+			</div>
+			<div id="container">
+			</div>
+			<div text-center margin-top>
+				<strong>Filtrar por :</strong>
+				<i (click)="filtrar()" class="fa fa-filter" aria-hidden="true" style="font-size: 30px" padding-top></i>
+				<button ion-button clear margin-left (click)="aplicarFiltro()">Aplicar filtro</button>
+			</div>
+			<hr>
+			<hr>
+			<ion-card>
+				<ion-grid>
+					<ion-row>
+						<ion-col text-center col-12 col-md-12>
+							<span item-left><strong>Monto total USD: </strong> {{ monto_total }}</span>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col text-center col-12 col-md-12>
+							<span item-left><strong>Total de proyectos: </strong> {{ total_proyectos }}</span>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card>
+			<ion-card *ngFor="let proyecto of reportes">
+				<ion-grid>
+					<ion-row>
+						<ion-col text-center col-12 col-sm-2>
+							<span item-left><strong>{{ proyecto.campo }}</strong></span>
+							<p>{{ proyecto.porcentaje }} %</p>
+						</ion-col>
+						<ion-col col-12 text-center col-sm-5>
+							<span item-left><strong>Monto USD: </strong>{{ proyecto.monto }}</span>
+						</ion-col>
+						<ion-col col-12 col-sm-3 text-wrap text-center>
+							<span item-left><strong>No. de proyectos: </strong>{{ proyecto.numero_proyectos }}</span>
+						</ion-col>
+						<ion-col col-12 col-sm-2 text-right>
+							<button ion-button clear item-end (click)="verProyectosAgrupados(proyecto.group_by, proyecto.campo, proyecto.monto)">
+								<p style="text-transform: none; color: #3498DB;">Ver detalle</p>
+							</button>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card>
+			<ion-card>
+				<ion-grid>
+					<ion-row>
+						<ion-col text-center col-12 col-md-12>
+							<span item-left><strong>Monto total USD: </strong> {{ monto_total }}</span>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col text-center col-12 col-md-12>
+							<span item-left><strong>Total de proyectos: </strong> {{ total_proyectos }}</span>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card>
+			<div padding-top text-center style="border-bottom: 3px double #2E86C1;" [hidden]="!visible">
+				<h3>Proyectos agrupados</h3>
+			</div>
+			<ion-card [hidden]="!visible">
+				<ion-grid>
+					<ion-row>
+						<ion-col text-center col-12 col-sm-2>
+							<h4>Varios proyectos</h4>
+							<strong>{{ proyectos_agrupados.porcentaje }} %</strong>
+						</ion-col>
+						<ion-col col-12 text-center col-sm-5>
+							<strong>Monto USD: </strong>
+							<p class="medium">{{ proyectos_agrupados.suma_montos_menores_de_uno }}</p>
+						</ion-col>
+						<ion-col col-12 col-sm-3 text-wrap text-center>
+							<strong>No. de proyectos: </strong>{{ proyectos_agrupados.numero_proyectos }}
+						</ion-col>
+						<ion-col col-12 col-sm-2 text-right>
+							<button ion-button clear item-end (click)="verProyectosAgrupadosClientePorcentajeMenosAUno(proyectos_agrupados.suma_montos_menores_de_uno)">
+								<p style="text-transform: none; color: #3498DB;">Ver detalle</p>
+							</button>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card>
+		</ion-list>
+		<ion-list *ngSwitchCase="'porcentaje'">
+			<div text-right>
+				<div text-right>
+					<button ion-button clear (click)="modoCircular(campo_select, campo_agrupacion, segmento)">Ver modo circular</button>
+				</div>
+			</div>
+			<div id="container">
+			</div>
+			<div text-center margin-top>
+				<strong>Filtrar por :</strong>
+				<i (click)="filtrar()" class="fa fa-filter" aria-hidden="true" style="font-size: 30px" padding-top></i>
+				<button ion-button clear margin-left (click)="aplicarFiltro()">Aplicar filtro</button>
+			</div>
+			<hr>
+			<hr>
+			<ion-card>
+				<ion-grid>
+					<ion-row>
+						<ion-col text-center col-12 col-md-12>
+							<span item-left><strong>Monto total USD: </strong> {{ monto_total }}</span>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col text-center col-12 col-md-12>
+							<span item-left><strong>Total de proyectos: </strong> {{ total_proyectos }}</span>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card>
+			<ion-card *ngFor="let proyecto of proyectos">
+				<ion-grid>
+					<ion-row>
+						<ion-col text-center col-12 col-sm-2>
+							<span item-left><strong>{{ proyecto.campo }}</strong></span>
+							<p>{{ proyecto.porcentaje }} %</p>
+						</ion-col>
+						<ion-col col-12 text-center col-sm-5>
+							<span item-left><strong>Monto USD: </strong>{{ proyecto.monto }}</span>
+						</ion-col>
+						<ion-col col-12 col-sm-3 text-wrap text-center>
+							<span item-left><strong>No. de proyectos: </strong>{{ proyecto.numero_proyectos }}</span>
+						</ion-col>
+						<ion-col col-12 col-sm-2 text-right>
+							<button ion-button clear item-end (click)="verProyectosAgrupados(proyecto.group_by, proyecto.campo, proyecto.monto)">
+								<p style="text-transform: none; color: #3498DB;">Ver detalle</p>
+							</button>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card>
+			<ion-card>
+				<ion-grid>
+					<ion-row>
+						<ion-col text-center col-12 col-md-12>
+							<span item-left><strong>Monto total USD: </strong> {{ monto_total }}</span>
+						</ion-col>
+						<ion-col col-2>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col text-center col-12 col-md-12>
+							<span item-left><strong>Total de proyectos: </strong> {{ total_proyectos }}</span>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card>
+			<div padding-top text-center style="border-bottom: 3px double #2E86C1;" [hidden]="!visible">
+				<h3>Proyectos agrupados</h3>
+			</div>
+			<ion-card [hidden]="!visible">
+				<ion-grid>
+					<ion-row>
+						<ion-col text-center col-12 col-sm-2>
+							<h4>Varios proyectos</h4>
+							<strong>{{ proyectos_agrupados.porcentaje }} %</strong>
+						</ion-col>
+						<ion-col col-12 text-center col-sm-5>
+							<strong>Monto USD: </strong>
+							<p class="medium">{{ proyectos_agrupados.suma_montos_menores_de_uno }}</p>
+						</ion-col>
+						<ion-col col-12 col-sm-3 text-wrap text-center>
+							<strong>No. de proyectos: </strong>{{ proyectos_agrupados.numero_proyectos }}
+						</ion-col>
+						<ion-col col-12 col-sm-2 text-right>
+							<button ion-button clear item-end (click)="verProyectosAgrupadosClientePorcentajeMenosAUno(proyectos_agrupados.suma_montos_menores_de_uno)">
+								<p style="text-transform: none; color: #3498DB;">Ver detalle</p>
+							</button>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-card>
+		</ion-list>
+	</div>
+</ion-content>

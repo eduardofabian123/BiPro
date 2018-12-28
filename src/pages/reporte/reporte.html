@@ -1,0 +1,46 @@
+<ion-header>
+	<ion-navbar color="twitter">
+		<ion-title text-center>Reportes</ion-title>
+		<ion-buttons left>
+			<button ion-button icon-only (click)="mostrarOpciones()">
+				<ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-buttons right>
+			<button ion-button icon-only (click)="logout()">
+				<ion-icon ios="ios-log-out" md="md-log-out"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+<ion-content padding>
+	<ion-list>
+		<ion-item>
+			<ion-grid>
+				<ion-row>
+					<ion-col col-6>
+					</ion-col>
+					<ion-col col-12 text-right col-sm-6>
+						<button ion-button (click)="nuevoReporte()">Nuevo Reporte</button>
+					</ion-col>
+				</ion-row>
+				<ion-row wrap>
+					<ion-col col-12 text-right col-sm-6 *ngFor="let reporte of reportes" margin-bottom (click)="detalleReporte(reporte.id, reporte.nombre_reporte )">
+						<ion-card>
+							<ion-card-content text-wrap text-center>
+								<ion-card-title>
+									<i class="fa fa-bar-chart" aria-hidden="true" style="font-size: 60px;"></i>
+									<p class="medium"><strong>{{ reporte.nombre_reporte}}</strong></p>
+								</ion-card-title>
+								<strong>Monto total USD: </strong>
+								<p class="medium">{{ reporte.total_usd }}</p>
+								<strong>Total de proyectos: </strong>
+								<p class="medium">{{ reporte.total_proyectos }}</p>
+							</ion-card-content>
+						</ion-card>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-item>
+	</ion-list>
+</ion-content>

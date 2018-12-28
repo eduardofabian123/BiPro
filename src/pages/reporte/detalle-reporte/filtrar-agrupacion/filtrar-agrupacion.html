@@ -1,0 +1,31 @@
+<ion-header>
+	<ion-navbar padding-top no-border-bottom color="twitter">
+		<ion-title>Selecciona una o varias opciones</ion-title>
+		<ion-buttons start>
+			<button ion-button (click)="cancelar()">
+				<span ion-text color="primary" showWhen="ios">Cancelar</span>
+				<ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<button ion-button block color="botton" (click)="aceptar()">Aceptar</button>
+	<ion-list>
+		<ion-item *ngFor="let item of registros">
+			<ion-label>{{ item.registros }}</ion-label>
+			<ion-checkbox [(ngModel)]="item.checked" (ionChange)="seleccionFiltros($event, item.registros)"></ion-checkbox>
+			<!-- 			<ion-label [hidden]="!visible">Proyectos agrupados</ion-label>
+			<ion-checkbox [hidden]="!visible" (ionChange)="seleccionFiltros($event, item.contratante)"></ion-checkbox> -->
+		</ion-item>
+	</ion-list>
+	<button [hidden]="!visible" ion-button clear full>Esta opcion es para filtrar aquellos proyectos que representan una participación mínima</button>
+	<ion-list [hidden]="!visible">
+		<ion-item>
+			<ion-label>Proyectos agrupados
+			</ion-label>
+			<ion-checkbox (ionChange)="seleccionFiltros($event, 'contratante-agrupado')">
+			</ion-checkbox>
+		</ion-item>
+	</ion-list>
+</ion-content>
